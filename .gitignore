@@ -1,0 +1,12 @@
+*.settings
+*.classpath
+*.project
+*/bin
+*/target
+/target
+/bin
+*rebel.xml
+.idea
+*.iml
+.tern-project
+*.*~
