@@ -19,8 +19,9 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		//Faz com que os pring conheça o controlle, passa a class de configuração(AppWebConfiguration) para avisar quais os controller que o spring vai usar
-		return new Class[]{AppWebConfiguration.class};
+		//Faz com que os spring as conheça as classes controlles atraves da classe de configuração(AppWebConfiguration). Essa classe avisar quais os controller que o spring vai usar
+		//Faz com que os spring as conheça as classes daos atraves da classe de configuração(JPAConfiguration). Essa classe avisar quais os daos que o spring vai usar
+		return new Class[]{AppWebConfiguration.class, JPAConfiguration.class};
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
+import br.com.casadocodigo.loja.daos.ProdutoDAO;
 
 //Class de configuração especifico para a parte web.
 
@@ -13,7 +14,7 @@ import br.com.casadocodigo.loja.controllers.HomeController;
 @EnableWebMvc
 //"basePackages" não é uma boa opção, pq se mudarmos o pacote, temos que lembrar de mudar aqui também.
 //@ComponentScan(basePackages={"br.com.casadocodigo.loja.controllers"})
-@ComponentScan(basePackageClasses={HomeController.class}) //passando a controller com .class, o spring já sabe que tem que pegar o pacote que essa controle(HomeController) está
+@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class}) //passando a controller com .class, o spring já sabe que tem que pegar o pacote que essa controle(HomeController) e esse dao(HomeController) está
 public class AppWebConfiguration {
 	
 	/**
