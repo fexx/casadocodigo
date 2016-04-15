@@ -17,8 +17,8 @@ public class ProdutosController {
 	
 	@RequestMapping("produtos/form")
 	public ModelAndView form(){
-		ModelAndView modelAndView = new ModelAndView("produtos/form");//informe atraves do contrutor, para qual pagina deve ir 
-		modelAndView.addObject("tipos", TipoPreco.values()); // para os valores para a view form
+		ModelAndView modelAndView = new ModelAndView("produtos/form");//informe atraves do construtor, para qual pagina deve ir 
+		modelAndView.addObject("tipos", TipoPreco.values()); // manda os valores da controller para a view "form.jsp"
 		return modelAndView;
 	}
 	

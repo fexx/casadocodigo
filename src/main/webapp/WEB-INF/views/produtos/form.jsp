@@ -8,7 +8,6 @@
 <title>Livro de java, android, iphone, ruby, php e muito mais - casa do código</title>
 </head>
 <body>
-
 	<form action="/casadocodigo/produtos" method="post">
 		<div>
 			<label>Titulo</label>
@@ -32,6 +31,5 @@
 		
 		<button type="submit">Cadastrar</button>
 	</form>
-
 </body>
 </html>
