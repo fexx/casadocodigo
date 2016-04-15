@@ -8,6 +8,11 @@
 <title>Livro de java, android, iphone, ruby, php e muito mais - casa do código</title>
 </head>
 <body>
+	
+	<h1>Lista de produtos</h1>
+
+	<div>${sucesso}</div>
+	
 	<table>
 		<tr>
 			<td>Título</td>

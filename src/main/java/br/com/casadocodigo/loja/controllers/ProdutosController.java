@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
 import br.com.casadocodigo.loja.models.Produto;
@@ -27,10 +28,15 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String grava(Produto produto){ //faz o bind com o mesmo nome que colocamos no "name" da jsp "form.jsp"
+	public ModelAndView grava(Produto produto, RedirectAttributes redirectAttributes){ //faz o bind com o mesmo nome que colocamos no "name" da jsp "form.jsp"
 		System.out.println(produto);
 		produtoDAO.gravar(produto);
-		return "produtos/ok";
+		//adiciona essa informação no segundo request, ou seja no request da lista. Ele mantém o request, sem isso ele não manda a mensagem e passa ele como parametro na url do navegador
+		//temos que receber como parametro no metodo para usalo.
+		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
+		//faz um redirect para a tela de produtos. Ele não deixa guardar os ultimos dados cadastrado no navegador, 
+		//ou seja ao tecla F5 ele não faz um novo post(um re-submit) com os dados antigos salvo, o que fazia respeti os dados do produto. isso é solucionado com o redirect
+		return new ModelAndView("redirect:produtos");
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
