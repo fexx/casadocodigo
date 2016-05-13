@@ -83,7 +83,7 @@
 	    </dependency>
 	    <!-- Para log's -->
 	    
-	<!-- hibernate, hibernate para usar o jpa, spring para cuidado da parte orm, e o mysql connector para conectar com o banco   -->
+	<!-- hibernate, hibernate para usar o jpa, spring para cuidado da parte orm, e o mysql connector para conectar com o banco -->
 	    <dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-entitymanager</artifactId>
@@ -109,7 +109,19 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.15</version>
 		</dependency>
-	<!-- hibernate, hibernate para usar o jpa, spring para cuidado da parte orm, e o mysql connector para conectar com o banco   -->
+	<!-- hibernate, hibernate para usar o jpa, spring para cuidado da parte orm, e o mysql connector para conectar com o banco -->
+	<!-- validations -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>1.0.0.GA</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>4.2.0.Final</version>
+		</dependency>
+	<!-- validations -->	
 	</dependencies>
   
   <build>
