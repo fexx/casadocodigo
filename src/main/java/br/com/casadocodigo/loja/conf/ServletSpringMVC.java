@@ -1,6 +1,8 @@
 package br.com.casadocodigo.loja.conf;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -38,6 +40,12 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8"); //consertando o encond das paginas com utf-8
 		return new Filter[]{encodingFilter};
+	}
+	
+	
+	@Override //Para o spring saber trabalhar com multiplos arquivos(multipart). exmeplo: fazer upload de arquivos
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(new MultipartConfigElement("")); //aqui informamos se ele vai ter barra, qual o tipo de arquivo ao spring receber. Mas não queremos nada, apenas o que vim para o spring.
 	}
 
 }

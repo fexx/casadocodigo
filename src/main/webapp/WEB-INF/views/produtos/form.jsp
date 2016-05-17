@@ -12,7 +12,7 @@
 <body>
 	<!-- no lugar de usar action="/casadocodigo/produtos" usamos o spring que já conhece a controle para fazer isso, nisso usamos as primeiras letras inciais da controle que é PC de ProdutoController e depois o metodo gravar, ficando ('PC#gravar')-->
 	<!-- commandName="produto" para espeficicar apenas o atributos sem o nome, exemplo: <form:errors path="produto.titulo"/> com isso eu uso assim: <form:errors path="titulo"/> -->
-	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="POST" commandName="produto">
+	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="POST" commandName="produto" enctype="multipart/form-data">
 <%-- 	<form action="/casadocodigo/produtos" method="POST"> --%>
 		<div>
 			<label>Titulo</label>
@@ -42,7 +42,10 @@
 				<form:hidden path="precos[${status.index}].tipo" value="${tipoPreco}"/>
 			</div>
 		</c:forEach>
-		
+		<div>
+			<label>Sumário</label>
+			<input name="sumario" type="file">
+		</div>
 		<button type="submit">Cadastrar</button>
 	</form:form>
 </body>

@@ -11,10 +11,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.infra.FileSaver;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
 import br.com.casadocodigo.loja.validation.ProdutoValidation;
@@ -25,6 +27,9 @@ public class ProdutosController {
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;
+	
+	@Autowired
+	private FileSaver fileSaver;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder){
@@ -39,10 +44,15 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST) // BindingResult tem que ser depois da classe que vai ser validada, nesse caso ele ficou depois da classe produto.
-	public ModelAndView gravar(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes){ //faz o bind com o mesmo nome que colocamos no "name" da jsp "form.jsp"
+	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes){ //faz o bind com o mesmo nome que colocamos no "name" da jsp "form.jsp"
+		System.out.println(sumario.getOriginalFilename()); //exibe o nome do arquivo
+		
 		if(result.hasErrors()){
 			return form(produto);
 		}
+		
+		String path = fileSaver.write("arquivos-sumario", sumario);
+		produto.setSumarioPath(path);
 		produtoDAO.gravar(produto);
 		//adiciona essa informação no segundo request, ou seja no request da lista. Ele mantém o request, sem isso ele não manda a mensagem e passa ele como parametro na url do navegador
 		//temos que receber como parametro no metodo para usalo.
