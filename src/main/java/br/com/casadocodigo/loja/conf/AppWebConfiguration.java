@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
 import br.com.casadocodigo.loja.infra.FileSaver;
+import br.com.casadocodigo.loja.models.CarrinhoCompras;
 
 //Class de configuração especifico para a parte web.
 
@@ -25,7 +26,7 @@ import br.com.casadocodigo.loja.infra.FileSaver;
 @EnableWebMvc
 //"basePackages" não é uma boa opção, pq se mudarmos o pacote, temos que lembrar de mudar aqui também.
 //@ComponentScan(basePackages={"br.com.casadocodigo.loja.controllers"})
-@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, FileSaver.class}) //passando a controller com .class, o spring já sabe que tem que pegar o pacote que essa controle(HomeController) e esse dao(HomeController) está
+@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoCompras.class}) //passando a controller com .class, o spring já sabe que tem que pegar o pacote que essa controle(HomeController) e esse dao(HomeController) está
 public class AppWebConfiguration extends WebMvcConfigurerAdapter{ // extends no WebMvcConfigurerAdapter apenas para sobrescrever o metodo addResourceHandlers, para o spring entender a pasta resources
 	
 	/**
@@ -38,6 +39,9 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{ // extends no 
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/"); //avisa ao spring que as views estão nessa pasta
 		resolver.setSuffix(".jsp"); //avisa ao spring que nossas paginas são paginas .jsp, sendo assim não precisa informar sempre nos metodos da controller.
+		
+		//resolver.setExposeContextBeansAsAttributes(true); avisamos ao spring que todos os nosso beans, ficará disponiveis como atributos na .jsp, por exemplo a classe bean: CarrinhoCompras.class que está sendo usanda na detalhe.jsp, Atenção: ao usar vc está dando direito que "todos" os beans ficará disponivel na jsp, um pouco perigoso.
+		resolver.setExposedContextBeanNames("carrinhoCompras"); //expecificamos ao spring que o bean CarrinhoCompras.class, ficará disponiveis como atributos na .jsp
 		
 		return resolver;
 	}
