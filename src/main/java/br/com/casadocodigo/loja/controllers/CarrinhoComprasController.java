@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,10 +27,15 @@ public class CarrinhoComprasController {
 	
 	@RequestMapping("/add")
 	public ModelAndView add(Integer produtoId, TipoPreco tipoPreco){
-		ModelAndView modelAndView = new ModelAndView("redirect:/produtos");
+		ModelAndView modelAndView = new ModelAndView("redirect:/carrinho"); //redirect:/carrinho manda direto para a pagina de carrinho de itens
 		CarrinhoItem carrinhoItem = criaItem(produtoId, tipoPreco);
 		carrinho.add(carrinhoItem);
 		return modelAndView;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET) //Quando não passa a url, por padrão quando usamos uma chamada get, ele chama o endereço com nome de url da controle: na nossa controle estamos mapeando o nome de /carrinho
+	public ModelAndView itens(){
+		return new ModelAndView("carrinho/itens");
 	}
 
 	//Responsavel em adicionar um item em um carrinho
